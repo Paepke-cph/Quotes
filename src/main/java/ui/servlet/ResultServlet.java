@@ -5,8 +5,11 @@
  */
 package ui.servlet;
 
+import core.Quote;
+import core.QuotesMapper;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,7 +42,12 @@ public class ResultServlet extends HttpServlet {
             out.println("<title>Servlet ResultServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ResultServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>List of all Quotes on DB</h1>");
+            ArrayList<Quote> quotes = (ArrayList<Quote>)request.getAttribute("quotes");
+            if(quotes.size() == 0) out.print("<h3>There are no quotes</h3>");
+            for (Quote quote : quotes) {
+                out.print("<h3>"+quote+"</h3>");
+            }
             out.println("</body>");
             out.println("</html>");
         }

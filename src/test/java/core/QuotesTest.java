@@ -19,8 +19,8 @@ public class QuotesTest {
 
     @Test
     public void testSomeMethod() {
-        Quotes q = new Quotes(1);
-        int i = q.getNumber();
-        assertEquals(2,i);
+        Quote q = new Quote(1,null,null);
+        int i = q.getID();
+        assertEquals(1,i);
     }
 }
