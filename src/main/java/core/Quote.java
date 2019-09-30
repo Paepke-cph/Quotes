@@ -1,4 +1,5 @@
 package core;
+// This class is to represent a Quote, with an id, author, and text.
 public class Quote {
     private int id;
     private String author, text;
