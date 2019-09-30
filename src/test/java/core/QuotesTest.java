@@ -18,9 +18,14 @@ public class QuotesTest {
     }
 
     @Test
-    public void testSomeMethod() {
-        Quote q = new Quote(1,null,null);
+    public void testConstructor() {
+        Quote q = new Quote(1,"T","TT");
         int i = q.getID();
+        String author = q.getAuthor();
+        String text = q.getText();
         assertEquals(1,i);
+        assertEquals("T",author);
+        assertEquals("TT",text);
+        assertEquals("T: TT", q.toString());
     }
 }

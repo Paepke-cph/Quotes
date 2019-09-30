@@ -8,12 +8,16 @@ package ui.servlet;
 import core.QuotesMapper;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import storage.SQLConnector;
 
 /**
  *
@@ -32,11 +36,13 @@ public class FrontServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        
-        request.setAttribute("quotes", QuotesMapper.getAllQuotes());
-        RequestDispatcher rd = request.getRequestDispatcher("ResultServlet");
-        rd.forward(request, response);
+        try(SQLConnector connector = new SQLConnector(true)) {
+            request.setAttribute("quote", QuotesMapper.getRandomQuote(connector));
+            RequestDispatcher rd = request.getRequestDispatcher("ResultServlet");
+            rd.forward(request, response);    
+        } catch (Exception ex) {
+            Logger.getLogger(FrontServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

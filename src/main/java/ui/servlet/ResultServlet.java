@@ -43,11 +43,11 @@ public class ResultServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>List of all Quotes on DB</h1>");
-            ArrayList<Quote> quotes = (ArrayList<Quote>)request.getAttribute("quotes");
-            if(quotes.size() == 0) out.print("<h3>There are no quotes</h3>");
-            for (Quote quote : quotes) {
+            Quote quote = (Quote)request.getAttribute("quote");
+            if(quote == null)
+                out.print("<h3>There are no quotes</h3>");
+            else
                 out.print("<h3>"+quote+"</h3>");
-            }
             out.println("</body>");
             out.println("</html>");
         }

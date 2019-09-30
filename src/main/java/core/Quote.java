@@ -12,6 +12,9 @@ public class Quote {
         return id;
     }
     
+    public String getAuthor() { return author;}
+    public String getText() { return text;}
+    
     @Override
     public String toString() {
         return author + ": " + text;
